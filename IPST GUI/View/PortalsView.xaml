@@ -1,0 +1,63 @@
+﻿<Window x:Class="IPST_GUI.View.PortalsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ignore="http://www.ignore.com"
+        xmlns:converters="clr-namespace:IPST_GUI.Converters"
+        xmlns:p="clr-namespace:IPST_GUI.Properties"
+        mc:Ignorable="d ignore"
+        DataContext="{Binding Portals, Source={StaticResource Locator}}">
+    <Window.Resources>
+        <converters:SubmissionStatusToVisibility x:Key="SubmissionStatusToVisibility"></converters:SubmissionStatusToVisibility>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Menu>
+            <MenuItem Header="{x:Static p:Resources.IDS_PORTALS_MENU_PARAMETERS}">
+                <MenuItem Header="{x:Static p:Resources.IDS_PORTALS_MENU_PARAMETERS_SORT}">
+                    <MenuItem IsCheckable="True" IsChecked="{Binding SubmissionChecked}" Header="{x:Static p:Resources.IDS_PORTALS_MENU_PARAMETERS_SORT_SUBMISSION_DATE}" Command="{Binding OrderByCommand}" CommandParameter="Submission"/>
+                    <MenuItem IsCheckable="True" IsChecked="{Binding AcceptedChecked}" Header="{x:Static p:Resources.IDS_PORTALS_MENU_PARAMETERS_SORT_ACCEPTED_DATE}" Command="{Binding OrderByCommand}" CommandParameter="Accepted"/>
+                    <MenuItem IsCheckable="True" IsChecked="{Binding RejectedChecked}" Header="{x:Static p:Resources.IDS_PORTALS_MENU_PARAMETERS_SORT_REJECT_DATE}" Command="{Binding OrderByCommand}" CommandParameter="Rejected"/>
+                    <MenuItem IsCheckable="True" IsChecked="{Binding DescChecked}" Header="{x:Static p:Resources.IDS_PORTALS_MENU_PARAMETERS_SORT_DESC}" Command="{Binding OrderByCommand}" CommandParameter="{x:Static p:Resources.IDS_PORTALS_MENU_PARAMETERS_SORT_DESC}"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ListView x:Name="PortalListView" Grid.Row="1" ItemsSource="{Binding PortalSubmissions}" MouseDoubleClick="ListView_MouseDoubleClick">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    
+                    <Grid Margin="3">
+                        <Grid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="{x:Static p:Resources.IDS_PORTALS_CONTEXTMENU_DETAILS}" Command="{Binding OpenSubmissionCommand}" CommandParameter="{Binding}"/>
+                                <MenuItem Header="{x:Static p:Resources.IDS_PORTALS_CONTEXTMENU_IGNORE_SUBMISSION}" Command="{Binding IgnoreSubmissionCommand}" CommandParameter="{Binding}" Visibility="{Binding SubmissionStatus, Converter={StaticResource SubmissionStatusToVisibility}, ConverterParameter=Pending}"/>
+                            </ContextMenu>
+
+                        </Grid.ContextMenu>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="150*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.RowSpan="2" Margin="5" Width="20" Height="20" Background="{Binding DefaultThumbnailColor}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DefaultThumbnailSymbol}" FontFamily="Webdings" Foreground="White" />
+                        <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding PortalImage}" Margin="5" Width="20" Height="20" Stretch="Fill" Visibility="{Binding ImageLoaded}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Title}" Margin="3,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SubmissionDate, StringFormat=D}" Margin="3,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding LastNew}" Margin="3,0"/>
+                        <TextBlock Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Text="{Binding Waiting}" VerticalAlignment="Center" FontSize="22" Margin="3,0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>

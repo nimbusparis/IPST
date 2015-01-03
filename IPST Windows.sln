@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests\Tests.csproj", "{68A724ED-6FD0-4760-B4EC-32D721DD9EA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPST Engine", "IPST Engine\IPST Engine.csproj", "{C421C84A-F948-4B4C-B695-7783E2D2845D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPST GUI", "IPST GUI\IPST GUI.csproj", "{CBBABCFD-5119-4469-86FA-8E1973DC8204}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B0A40CDB-582F-4ECD-A7B9-2F74EADAF2BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGoogleAPI", "TestGoogleAPI\TestGoogleAPI.csproj", "{54D2F266-E0A7-4ECF-B0BC-9961A317A3D2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedFiles", "SharedFiles", "{E299EF89-EE87-4103-97EA-197BD9BF6FA6}"
+	ProjectSection(SolutionItems) = preProject
+		client_secret.json = client_secret.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1A902CFA-3323-40BE-B337-37FE35EC70DD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGUI", "Tests\TestGUI\TestGUI.csproj", "{B4F1F17E-ED4E-449B-966E-43E646477C55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68A724ED-6FD0-4760-B4EC-32D721DD9EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A724ED-6FD0-4760-B4EC-32D721DD9EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A724ED-6FD0-4760-B4EC-32D721DD9EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A724ED-6FD0-4760-B4EC-32D721DD9EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C421C84A-F948-4B4C-B695-7783E2D2845D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C421C84A-F948-4B4C-B695-7783E2D2845D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C421C84A-F948-4B4C-B695-7783E2D2845D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C421C84A-F948-4B4C-B695-7783E2D2845D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBBABCFD-5119-4469-86FA-8E1973DC8204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBBABCFD-5119-4469-86FA-8E1973DC8204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBBABCFD-5119-4469-86FA-8E1973DC8204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBBABCFD-5119-4469-86FA-8E1973DC8204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54D2F266-E0A7-4ECF-B0BC-9961A317A3D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54D2F266-E0A7-4ECF-B0BC-9961A317A3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54D2F266-E0A7-4ECF-B0BC-9961A317A3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54D2F266-E0A7-4ECF-B0BC-9961A317A3D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4F1F17E-ED4E-449B-966E-43E646477C55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4F1F17E-ED4E-449B-966E-43E646477C55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4F1F17E-ED4E-449B-966E-43E646477C55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4F1F17E-ED4E-449B-966E-43E646477C55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{68A724ED-6FD0-4760-B4EC-32D721DD9EA5} = {B0A40CDB-582F-4ECD-A7B9-2F74EADAF2BA}
+		{54D2F266-E0A7-4ECF-B0BC-9961A317A3D2} = {B0A40CDB-582F-4ECD-A7B9-2F74EADAF2BA}
+		{B4F1F17E-ED4E-449B-966E-43E646477C55} = {B0A40CDB-582F-4ECD-A7B9-2F74EADAF2BA}
+	EndGlobalSection
+EndGlobal
