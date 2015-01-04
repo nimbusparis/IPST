@@ -8,8 +8,8 @@ namespace IPST_Engine
     public interface IIPSTEngine
     {
         Task ConnectAsync(Stream clientSecretStream);
-        Task<List<PortalSubmission>> GetPortalEmails(string subject, DateTime? getAfter, IProgress<Tuple<int, int>> progress);
-        Task CheckSubmissions(IProgress<Tuple<int, int>> progress);
+        Task<List<PortalSubmission>> GetPortalEmails(string subject, DateTime? getAfter, IProgress<SubmissionProgress> progress);
+        Task CheckSubmissions(IProgress<SubmissionProgress> progress);
         IList<PortalSubmission> Pending { get; }
         IList<PortalSubmission> Rejected { get; }
         IList<PortalSubmission> Accepted { get; }

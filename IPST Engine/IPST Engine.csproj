@@ -131,6 +131,7 @@
     <Compile Include="Repository\PortalSubmissionRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\RepositoryBase.cs" />
+    <Compile Include="SubmissionProgress.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

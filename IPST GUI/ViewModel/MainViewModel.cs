@@ -77,10 +77,10 @@ namespace IPST_GUI.ViewModel
 
 
 
-        private void UpdateProgressBar(Tuple<int, int> obj)
+        private void UpdateProgressBar(SubmissionProgress obj)
         {
-            CurrentProcessing = obj.Item1;
-            MaxProcessing = obj.Item2;
+            CurrentProcessing = obj.Current;
+            MaxProcessing = obj.Maximum;
         }
 
 

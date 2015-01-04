@@ -15,14 +15,14 @@ namespace Tests
     {
         private IPortalSubmissionRepository repository;
         private IPortalSubmissionParser parser;
-        private IProgress<Tuple<int, int>> _progress;
+        private IProgress<SubmissionProgress> _progress;
         private MemoryStream clientSecretStream;
 
         public GMailEngineTest()
         {
             repository = A.Fake<IPortalSubmissionRepository>();
             parser = A.Fake<IPortalSubmissionParser>();
-            _progress = A.Fake<IProgress<Tuple<int, int>>>();
+            _progress = A.Fake<IProgress<SubmissionProgress>>();
             clientSecretStream = new MemoryStream();
         }
 
@@ -243,7 +243,7 @@ namespace Tests
             var target = new IPSTEngine(repository, parser);
             target.ConnectAsync(clientSecretStream).Wait();
             target.CheckSubmissions(_progress).Wait();
-            A.CallTo(()=>_progress.Report(A<Tuple<int, int>>._)).MustHaveHappened();
+            A.CallTo(()=>_progress.Report(A<SubmissionProgress>._)).MustHaveHappened();
         }
     }
 }

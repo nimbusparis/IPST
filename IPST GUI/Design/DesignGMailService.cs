@@ -138,12 +138,12 @@ namespace IPST_GUI.Design
             }
         }
 
-        public Task<List<PortalSubmission>> GetPortalEmails(string subject, DateTime? getAfter, IProgress<Tuple<int, int>> progress)
+        public Task<List<PortalSubmission>> GetPortalEmails(string subject, DateTime? getAfter, IProgress<SubmissionProgress> progress)
         {
             return null;
         }
 
-        public async Task CheckSubmissions(IProgress<Tuple<int, int>> progress)
+        public async Task CheckSubmissions(IProgress<SubmissionProgress> progress)
         {
             
         }
