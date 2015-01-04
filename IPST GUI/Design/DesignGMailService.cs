@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using IPST_Engine;
 
@@ -7,7 +8,7 @@ namespace IPST_GUI.Design
 {
     public class DesignIPSTService : IIPSTEngine
     {
-        public async Task ConnectAsync()
+        public async Task ConnectAsync(Stream clientSecretStream)
         {
         }
 

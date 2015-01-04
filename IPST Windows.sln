@@ -14,9 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestGoogleAPI", "TestGoogleAPI\TestGoogleAPI.csproj", "{54D2F266-E0A7-4ECF-B0BC-9961A317A3D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedFiles", "SharedFiles", "{E299EF89-EE87-4103-97EA-197BD9BF6FA6}"
-	ProjectSection(SolutionItems) = preProject
-		client_secret.json = client_secret.json
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1A902CFA-3323-40BE-B337-37FE35EC70DD}"
 	ProjectSection(SolutionItems) = preProject

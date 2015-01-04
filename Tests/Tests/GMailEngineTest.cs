@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq.Expressions;
 using FakeItEasy;
 using Google.Apis.Gmail.v1.Data;
@@ -15,13 +16,14 @@ namespace Tests
         private IPortalSubmissionRepository repository;
         private IPortalSubmissionParser parser;
         private IProgress<Tuple<int, int>> _progress;
+        private MemoryStream clientSecretStream;
 
         public GMailEngineTest()
         {
             repository = A.Fake<IPortalSubmissionRepository>();
             parser = A.Fake<IPortalSubmissionParser>();
             _progress = A.Fake<IProgress<Tuple<int, int>>>();
-;
+            clientSecretStream = new MemoryStream();
         }
 
         [Fact]
@@ -35,14 +37,14 @@ namespace Tests
         public void Connect_Test()
         {
             var engine = new IPSTEngine(repository, parser);
-            engine.ConnectAsync();
+            engine.ConnectAsync(clientSecretStream);
         }
 
         [Fact(Skip = "QUOTA LIMITED")]
         public void GetPortalsSumission_Test()
         {
             var engine = new IPSTEngine(repository, parser);
-            engine.ConnectAsync().Wait();
+            engine.ConnectAsync(clientSecretStream).Wait();
             var portalSubmissionTask = engine.GetPortalEmails("\"Ingress Portal\"", DateTime.MinValue, _progress);
             portalSubmissionTask.Wait();
             Check.That(portalSubmissionTask).IsNotNull();
@@ -59,11 +61,11 @@ namespace Tests
             //portalSubmissions = portalSubmissionTask.Result;
             //Check.That(portalSubmissions.Count).IsEqualTo(0);
         }
-        [Fact]
+        [Fact(Skip = "QUOTA LIMITED")]
         public void GetPortalsSubmission_NoResult_Test()
         {
             var engine = new IPSTEngine(repository, parser);
-            engine.ConnectAsync().Wait();
+            engine.ConnectAsync(clientSecretStream).Wait();
             var portalSubmissionTask = engine.GetPortalEmails("\"Ingress Portal\"", DateTime.Today.AddDays(1), _progress);
             portalSubmissionTask.Wait();
             Check.That(portalSubmissionTask).IsNotNull();
@@ -99,7 +101,7 @@ namespace Tests
             A.CallTo(() => parser.ParseMessage(A<Message>._))
                 .Returns(new PortalSubmission {SubmissionStatus = SubmissionStatus.Pending});
             var engine = new IPSTEngine(repository, parser);
-            engine.ConnectAsync().Wait();
+            engine.ConnectAsync(clientSecretStream).Wait();
 
             var submissionsTask = engine.CheckSubmissions(_progress);
             submissionsTask.Wait();
@@ -122,7 +124,7 @@ namespace Tests
             A.CallTo(() => parser.ParseMessage(A<Message>._))
                 .Returns(new PortalSubmission {SubmissionStatus = SubmissionStatus.Accepted, DateAccept = DateTime.Today, PortalUrl = new Uri("http://www.ingress.com/portal")});
             var engine = new IPSTEngine(repository, parser);
-            engine.ConnectAsync().Wait();
+            engine.ConnectAsync(clientSecretStream).Wait();
 
             var submissionsTask = engine.CheckSubmissions(_progress);
             submissionsTask.Wait();
@@ -139,7 +141,7 @@ namespace Tests
             A.CallTo(() => parser.ParseMessage(A<Message>._))
                 .Returns(new PortalSubmission {SubmissionStatus = SubmissionStatus.Rejected, DateReject = DateTime.Today, RejectionReason = RejectionReason.NotMeetCriteria});
             var engine = new IPSTEngine(repository, parser);
-            engine.ConnectAsync().Wait();
+            engine.ConnectAsync(clientSecretStream).Wait();
 
             var submissionsTask = engine.CheckSubmissions(_progress);
             submissionsTask.Wait();
@@ -166,7 +168,7 @@ namespace Tests
             A.CallTo(() => parser.ParseMessage(A<Message>._))
                 .Returns(new PortalSubmission { SubmissionStatus = SubmissionStatus.Accepted, DateSubmission = DateTime.Today.AddDays(-1), DateAccept = DateTime.Today, PortalUrl = new Uri("http://www.ingress.com/portal") });
             var engine = new IPSTEngine(repository, parser);
-            engine.ConnectAsync().Wait();
+            engine.ConnectAsync(clientSecretStream).Wait();
             var submissionsTask = engine.CheckSubmissions(_progress);
             submissionsTask.Wait();
             A.CallTo(() => repository.Save(A<PortalSubmission>.That.Matches(p => PortalLiveSavePredicate(p)))).MustHaveHappened();
@@ -179,7 +181,7 @@ namespace Tests
             A.CallTo(() => parser.ParseMessage(A<Message>._))
                 .Returns(new PortalSubmission { SubmissionStatus = SubmissionStatus.Rejected, DateSubmission = DateTime.Today.AddDays(-1), DateReject = DateTime.Today, RejectionReason = RejectionReason.NotMeetCriteria});
             var engine = new IPSTEngine(repository, parser);
-            engine.ConnectAsync().Wait();
+            engine.ConnectAsync(clientSecretStream).Wait();
             var submissionsTask = engine.CheckSubmissions(_progress);
             submissionsTask.Wait();
             A.CallTo(() => repository.Save(A<PortalSubmission>.That.Matches(p => PortalRejectedSavePredicate(p)))).MustHaveHappened();
@@ -239,7 +241,7 @@ namespace Tests
         {
             A.CallTo(() => repository.GetLastSubmissionDateTime()).Returns(DateTime.Today.AddDays(-2));
             var target = new IPSTEngine(repository, parser);
-            target.ConnectAsync().Wait();
+            target.ConnectAsync(clientSecretStream).Wait();
             target.CheckSubmissions(_progress).Wait();
             A.CallTo(()=>_progress.Report(A<Tuple<int, int>>._)).MustHaveHappened();
         }
