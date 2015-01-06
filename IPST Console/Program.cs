@@ -4,6 +4,7 @@ using FluentNHibernate.Cfg.Db;
 using IPST_Engine;
 using IPST_Engine.Mapping;
 using IPST_Engine.Repository;
+using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
 namespace IPST_Console
@@ -13,7 +14,12 @@ namespace IPST_Console
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome in the Ingress Portal Submission Tracker console");
-            var sessionFactory = Fluently.Configure().Database(SQLiteConfiguration.Standard.UsingFile("IPSTData.db"))
+            //Configuration nhibernateConfiguration = new Configuration().Configure("hibernate.linux.cfg.xml");
+
+
+            var sessionFactory = Fluently.Configure()
+                
+                .Database(SQLiteConfiguration.Standard.UsingFile("IPSTData.db"))
             .Mappings(m => m.FluentMappings.Add<PortalSubmissionMapping>())
             .ExposeConfiguration(c=>new SchemaUpdate(c).Execute(false, true))
             .BuildSessionFactory();
