@@ -29,6 +29,15 @@ namespace IPST_GUI.View
             portalSubmissions.ForEach(p => viewModel.PortalSubmissions.Add(new PortalViewModel(p, locator.PortalSubmissionRepository)));
 
             Messenger.Default.Register<MessageNavigatePortal>(this, NotificationMessageReceived);
+            Messenger.Default.Register<MessageManualAcceptPortal>(this, NavigateManualAcceptPortal);
+        }
+
+        private void NavigateManualAcceptPortal(MessageManualAcceptPortal obj)
+        {
+            ViewModelLocator.RegisterInstance(obj.PortalSubmission);
+            var manualAcceptView = new ManualAcceptView();
+            manualAcceptView.ShowDialog();
+            //ManualAcceptViewModel viewModel
         }
 
         private void NotificationMessageReceived(MessageNavigatePortal obj)

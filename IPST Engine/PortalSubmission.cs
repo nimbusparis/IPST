@@ -4,7 +4,7 @@ namespace IPST_Engine
 {
     public enum SubmissionStatus
     {
-        Pending, Accepted, Rejected, Ignored
+        Pending, Accepted, Rejected, Ignored, Appealed
     }
 
     public enum RejectionReason

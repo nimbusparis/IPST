@@ -72,7 +72,8 @@ namespace IPST_GUI.ViewModel
             _unityContainer.RegisterType<MainViewModel>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<PortalsViewModel>(new ContainerControlledLifetimeManager());
             _unityContainer.RegisterType<ChartViewModel>(new ContainerControlledLifetimeManager());
-            
+            _unityContainer.RegisterType<ManualAcceptViewModel>();
+
         }
 
         public ViewModelLocator()
@@ -80,6 +81,10 @@ namespace IPST_GUI.ViewModel
             CurrentPortal = new PortalViewModel();
         }
 
+        public static void RegisterInstance<T>(T obj)
+        {
+            _unityContainer.RegisterInstance(obj);
+        }
         public IPortalSubmissionRepository PortalSubmissionRepository
         {
             get { return _unityContainer.Resolve<IPortalSubmissionRepository>(); }
@@ -104,6 +109,13 @@ namespace IPST_GUI.ViewModel
         public PortalsViewModel Portals
         {
             get { return ServiceLocator.Current.GetInstance<PortalsViewModel>(); }
+        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "This non-static member is needed for data binding purposes.")]
+        public ManualAcceptViewModel ManualAccept
+        {
+            get { return ServiceLocator.Current.GetInstance<ManualAcceptViewModel>(); }
         }
 
         public virtual PortalViewModel CurrentPortal

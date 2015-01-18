@@ -91,6 +91,7 @@
     <Compile Include="BooleanToVisibilityConverterWithParamTest.cs" />
     <Compile Include="InvertBooleanConverterTest.cs" />
     <Compile Include="MainViewModelTest.cs" />
+    <Compile Include="ManualAcceptViewModelTest.cs" />
     <Compile Include="PortalsViewModelTest.cs" />
     <Compile Include="PortalViewModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

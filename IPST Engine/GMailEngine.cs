@@ -70,7 +70,14 @@ namespace IPST_Engine
 
         public IList<PortalSubmission> Rejected
         {
-            get { return _repository.GetAll(submission => submission.SubmissionStatus == SubmissionStatus.Rejected).OrderByDescending(p => p.DateReject).ToList(); }
+            get
+            {
+                return _repository
+                    .GetAll(submission => submission.SubmissionStatus == SubmissionStatus.Rejected ||
+                                          submission.SubmissionStatus == SubmissionStatus.Appealed)
+                    .OrderByDescending(p => p.DateReject)
+                    .ToList();
+            }
         }
 
 

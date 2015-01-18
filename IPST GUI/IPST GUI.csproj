@@ -151,6 +151,7 @@
     <Compile Include="Converters\InvertBooleanConverter.cs" />
     <Compile Include="Converters\SubmissionStatusToVisibility.cs" />
     <Compile Include="Design\DesignDataService.cs" />
+    <Compile Include="Message\MessageManualAcceptPortal.cs" />
     <Compile Include="Message\MessageNavigateCharts.cs" />
     <Compile Include="Message\MessageNavigatePortals.cs" />
     <Compile Include="Message\MessageNavigateView.cs" />
@@ -165,8 +166,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="ViewModel\ChartViewModel.cs" />
+    <Compile Include="ViewModel\ManualAcceptViewModel.cs" />
     <Compile Include="View\ChartView.xaml.cs">
       <DependentUpon>ChartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManualAcceptView.xaml.cs">
+      <DependentUpon>ManualAcceptView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PortalsView.xaml.cs">
       <DependentUpon>PortalsView.xaml</DependentUpon>
@@ -200,6 +205,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ManualAcceptView.xaml">
+      <SubType>Form</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PortalsView.xaml">
       <SubType>Form</SubType>
       <Generator>MSBuild:Compile</Generator>

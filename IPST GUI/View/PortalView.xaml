@@ -9,6 +9,7 @@
         mc:Ignorable="d ignore"
         Title="{x:Static p:Resources.IDS_PORTAL_TITLE}"
         DataContext="{Binding CurrentPortal, Source={StaticResource Locator}}"
+        Background="{Binding DefaultThumbnailColor}"
         >
     <Window.Resources>
         <converters:SubmissionStatusToVisibility x:Key="SubmissionStatusToVisibility"></converters:SubmissionStatusToVisibility>

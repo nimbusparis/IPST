@@ -172,14 +172,19 @@ namespace IPST_GUI.ViewModel
         {
             get
             {
-                switch (_portalSubmission.SubmissionStatus)
+                if (_portalSubmission != null)
                 {
-                    case SubmissionStatus.Pending:
-                        return new SolidColorBrush(Colors.Gray);
-                    case SubmissionStatus.Accepted:
-                        return new SolidColorBrush(Colors.Green);
-                    case SubmissionStatus.Rejected:
-                        return new SolidColorBrush(Colors.Red);
+                    switch (_portalSubmission.SubmissionStatus)
+                    {
+                        case SubmissionStatus.Pending:
+                            return new SolidColorBrush(Colors.Gray);
+                        case SubmissionStatus.Accepted:
+                            return new SolidColorBrush(Colors.Green);
+                        case SubmissionStatus.Rejected:
+                            return new SolidColorBrush(Colors.Red);
+                        case SubmissionStatus.Appealed:
+                            return new SolidColorBrush(Colors.Blue);
+                    }
                 }
                 return null;
             }
@@ -196,6 +201,8 @@ namespace IPST_GUI.ViewModel
                         return "a";
                     case SubmissionStatus.Rejected:
                         return "r";
+                    case SubmissionStatus.Appealed:
+                        return "U";
                 }
                 return null;
             }
@@ -227,7 +234,30 @@ namespace IPST_GUI.ViewModel
         }
 
         #endregion
+        #region AppealSubmissionCommand
 
+        private RelayCommand _AppealSubmissionCommand;
+
+         
+
+        public RelayCommand AppealSubmissionCommand
+        {
+            get
+            {
+                return _AppealSubmissionCommand
+                       ?? (_AppealSubmissionCommand = new RelayCommand(
+                           () => ExecuteAppealSubmissionCommand()
+                           ));
+            }
+        }
+
+        private void ExecuteAppealSubmissionCommand()
+        {
+            _portalSubmission.SubmissionStatus = SubmissionStatus.Appealed;
+            _portalSubmissionRepository.Save(_portalSubmission);
+        }
+
+        #endregion
         #region IgnoreSubmissionCommand
 
         private RelayCommand<PortalViewModel> _ignoreSubmissionCommand;
@@ -258,7 +288,30 @@ namespace IPST_GUI.ViewModel
         }
 
         #endregion
+        #region ManualAcceptCommand
 
+        private RelayCommand _ManualAcceptCommand;
+
+         
+
+        public RelayCommand ManualAcceptCommand
+        {
+            get
+            {
+                return _ManualAcceptCommand
+                       ?? (_ManualAcceptCommand = new RelayCommand(
+                           () => ExecuteManualAcceptCommand()
+                           ));
+            }
+        }
+
+        private void ExecuteManualAcceptCommand()
+        {
+            MessengerInstance.Send<MessageManualAcceptPortal>(new MessageManualAcceptPortal(_portalSubmission));
+        }
+
+
+        #endregion
         #region NavigateIntelCommand
 
         private RelayCommand<Uri> _navigateIntelCommand;

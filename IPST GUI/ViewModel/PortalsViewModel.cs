@@ -47,6 +47,14 @@ namespace IPST_GUI.ViewModel
                         SubmissionStatus = SubmissionStatus.Rejected,
                         UpdateTime = new DateTime(2014, 05,05),
                     }, null),
+                    new PortalViewModel(new PortalSubmission
+                    {
+                        Title = "Portal 4",
+                        DateSubmission = new DateTime(2014, 01, 1),
+                        DateReject = new DateTime(2014, 07, 1),
+                        SubmissionStatus = SubmissionStatus.Appealed,
+                        UpdateTime = new DateTime(2014, 05,05),
+                    }, null),
                 };
             }
             DescChecked = true;

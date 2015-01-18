@@ -34,6 +34,12 @@ namespace TestGUI
             };
             target = new PortalViewModel(portalSubmission, null);
             Check.That(((SolidColorBrush)target.DefaultThumbnailColor).Color).Equals(Colors.Red);
+            portalSubmission = new PortalSubmission
+            {
+                SubmissionStatus = SubmissionStatus.Appealed,
+            };
+            target = new PortalViewModel(portalSubmission, null);
+            Check.That(((SolidColorBrush)target.DefaultThumbnailColor).Color).Equals(Colors.Blue);
 
         }
 
@@ -58,6 +64,12 @@ namespace TestGUI
             };
             target = new PortalViewModel(portalSubmission, null);
             Check.That(target.DefaultThumbnailSymbol).Equals("r");
+            portalSubmission = new PortalSubmission
+            {
+                SubmissionStatus = SubmissionStatus.Appealed,
+            };
+            target = new PortalViewModel(portalSubmission, null);
+            Check.That(target.DefaultThumbnailSymbol).Equals("U");
         }
 
         [Fact]
