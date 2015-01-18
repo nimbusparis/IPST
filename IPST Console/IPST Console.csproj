@@ -66,7 +66,7 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Data.Sqlite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL" Condition=" '$(OS)' == 'Unix' ">
+    <Reference Include="Mono.Data.Sqlite">
       <HintPath>..\packages\Mono.Data.Sqlite.Portable.1.0.0-beta11\lib\net4\Mono.Data.Sqlite.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
@@ -74,7 +74,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Portable">
+    <Reference Include="System.Data.Portable, Version=4.0.0.0, Culture=neutral, PublicKeyToken=59e704a76bc4613a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Mono.Data.Sqlite.Portable.1.0.0-beta11\lib\net4\System.Data.Portable.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.SQLite, Version=1.0.94.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL" Condition=" '$(OS)' != 'Unix' ">
@@ -87,7 +88,7 @@
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Transactions" />
-    <Reference Include="System.Transactions.Portable" Condition=" '$(OS)' == 'Unix' ">
+    <Reference Include="System.Transactions.Portable">
       <HintPath>..\packages\Mono.Data.Sqlite.Portable.1.0.0-beta11\lib\net4\System.Transactions.Portable.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
