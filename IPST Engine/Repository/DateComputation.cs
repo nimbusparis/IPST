@@ -34,6 +34,8 @@ namespace IPST_Engine.Repository
                 return (portalSubmission.DateAccept.Value - portalSubmission.DateSubmission.Value).Days;
             if (portalSubmission.SubmissionStatus == SubmissionStatus.Rejected && portalSubmission.DateReject.HasValue)
                 return (portalSubmission.DateReject.Value - portalSubmission.DateSubmission.Value).Days;
+            if (portalSubmission.SubmissionStatus == SubmissionStatus.Appealed)
+                return (DateTime.Now - portalSubmission.DateSubmission.GetValueOrDefault(DateTime.Now)).Days;
             return 0;
         }
     }

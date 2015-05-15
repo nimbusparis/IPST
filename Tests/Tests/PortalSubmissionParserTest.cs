@@ -18,6 +18,8 @@ namespace Tests
         const string validationImageUri = "http://lh4.ggpht.com/oR3LfQ-QpYTNW5Vwndf9mMGUzKktl8NExPRoGdJcLLYRjH85fb_BkNkLpIPjjWVooCAG6A6fHaEO3b4Yaj78";
         private const string portalUri = "https://www.ingress.com/intel?ll=42.482141,2.947034&amp;z=18";
 
+        private const string validationNewFormatHtmlBodyText =
+            "<div dir=\"ltr\"><p>Good work, Agent: we&#39;ve accepted your submission, and this Portal is now available on your Scanner and on the Intel Map. You have been awarded 1000 AP as well as this Portal&#39;s Key for your discovery.</p><p><i>-NianticOps</i></p>Borne<div><a href=\"https://www.ingress.com/intel?ll=39.727083,140.720493&amp;z=18\" target=\"_blank\">Dōnomae-96-3 Tazawako Obonai, Senboku-shi, Akita-ken 014-1201, Japan</a></div><img src=\"https://lh5.ggpht.com/XcoJB0YXd_Gu4XGdFLS7X43jCnzDiXEWMtd4zkMNRcHcK9MU_GhB1fMv3sGBXrnT1H7dpqK7SVXVpjL8wuIV\" alt=\"Portal - Borne\" style=\"display:block;border:0;min-height:auto;line-height:100%;outline:none;text-decoration:none\"></div>";
         private const string rejectUrlEncodedText =
             "PGRpdiBkaXI9Imx0ciI-PHA-VGhhbmsgeW91IGZvciB5b3VyIFBvcnRhbCBzdWJtaXNzaW9uLiBIb3dldmVyLCB0aGlzIFBvcnRhbCBjYW5kaWRhdGUgZG9lcyBub3QgbWVldCB0aGUgY3JpdGVyaWEgcmVxdWlyZWQgZm9yIGFwcHJvdmFsLjwvcD48cD5QbGVhc2UgcmVmZXIgdG8gPGEgaHJlZj0iaHR0cHM6Ly9zdXBwb3J0Lmdvb2dsZS5jb20vaW5ncmVzcy9hbnN3ZXIvMzA2NjE5Nz9obD1lbiZyZWZfdG9waWM9Mjc5OTI3MCI-TmV3IFBvcnRhbCBTdWJtaXNzaW9uPC9hPiBjcml0ZXJpYSBhdCBvdXIgSGVscCBDZW50ZXIgZm9yIGZ1cnRoZXIgaW5mb3JtYXRpb24uPC9wPjxpbWcgc3JjPSJodHRwOi8vbGgzLmdncGh0LmNvbS9UNi1IM1VJdGxha2xUNml6V3BobDJPQVdxY04zWmk0LTVObnhLRWE4VXpJa2V6NGViRUxzRmFmbzRaLWxoUHJJUE5DLUVUcVZydEh0SWNhYlN5WW1adyIgYWx0PSJQb3J0YWwgLSBBbnRlbm5lIFJlbGFpcyBEdSBQaWMgTmVvdWxvdXMiIHN0eWxlPSJkaXNwbGF5OiBibG9jaztib3JkZXI6IDA7aGVpZ2h0OiBhdXRvO2xpbmUtaGVpZ2h0OiAxMDAlO291dGxpbmU6IG5vbmU7dGV4dC1kZWNvcmF0aW9uOiBub25lOyI-PC9kaXY-";
         private const string rejectHtmlBodyText = "<div dir=\"ltr\"><p>Thank you for your Portal submission. However, this Portal candidate does not meet the criteria required for approval.</p><p>Please refer to <a href=\"https://support.google.com/ingress/answer/3066197?hl=en&ref_topic=2799270\">New Portal Submission</a> criteria at our Help Center for further information.</p><img src=\"http://lh3.ggpht.com/T6-H3UItlaklT6izWphl2OAWqcN3Zi4-5NnxKEa8UzIkez4ebELsFafo4Z-lhPrIPNC-ETqVrtHtIcabSyYmZw\" alt=\"Portal - Antenne Relais Du Pic Neoulous\" style=\"display: block;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;\"></div>";
@@ -76,6 +78,10 @@ namespace Tests
             Check.That(result.UpdateTime.Date).Equals(DateTime.Today);
         }
 
+        [Fact]
+        public void ParseValidationMessageNewFormat_Test()
+        {
+        }
         [Fact]
         public void ParseValidationMessage_Test()
         {
@@ -206,12 +212,19 @@ namespace Tests
             Check.That(result).IsNull();
         }
         [Fact]
-        public void ConvertBase64Url_test()
+        public void DecodeBase64Url_test()
         {
             var result = PortalSubmissionParser.DecodeBase64Url(submissionUrlEncodedText);
             Check.That(result).Equals(submissionHtmlBodyText);
         }
 
+        [Fact]
+        public void EncoreBase64Url_Test()
+        {
+            var result = PortalSubmissionParser.EncodeBase64Url(submissionHtmlBodyText);
+            Check.That(result).Equals(submissionUrlEncodedText);
+
+        }
         [Fact]
         public void ExtractImageUrlTest()
         {

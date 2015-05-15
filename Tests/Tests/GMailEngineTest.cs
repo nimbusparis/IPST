@@ -221,6 +221,22 @@ namespace Tests
             Check.That(results).ContainsExactly(pending);
         }
         [Fact]
+        public void Appealed_Test()
+        {
+            IList<PortalSubmission> pending = new List<PortalSubmission>
+            {
+                new PortalSubmission(),
+                new PortalSubmission(),
+                new PortalSubmission(),
+            };
+            A.CallTo(() => repository.GetAll(A<Expression<Func<PortalSubmission, bool>>>._)).Returns(pending);
+            var engine = new IPSTEngine(repository, parser);
+
+            IList<PortalSubmission> results = null;
+            Check.ThatCode(() => results = engine.Appealed).DoesNotThrow();
+            Check.That(results).ContainsExactly(pending);
+        }
+        [Fact]
         public void Rejected_Test()
         {
             IList<PortalSubmission> pending = new List<PortalSubmission>

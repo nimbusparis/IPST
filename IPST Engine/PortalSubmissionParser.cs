@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Text;
 using Google.Apis.Gmail.v1.Data;
+using NHibernate.Loader.Custom.Sql;
 
 namespace IPST_Engine
 {
@@ -80,6 +81,14 @@ namespace IPST_Engine
             return portalSubmission;
         }
 
+        public static string EncodeBase64Url(string urlPlainText)
+        {
+            var encodedTest = Convert.ToBase64String(Encoding.UTF8.GetBytes(urlPlainText));
+            var result = new StringBuilder(encodedTest);
+            result.Replace('+', '-');
+            result.Replace('/', '_');
+            return result.ToString();
+        }
         public static string DecodeBase64Url(string urlEncodedText)
         {
             int padChars = (urlEncodedText.Length % 4) == 0 ? 0 : (4 - (urlEncodedText.Length % 4));

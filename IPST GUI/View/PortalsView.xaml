@@ -48,11 +48,12 @@
                                           Command="{Binding IgnoreSubmissionCommand}" 
                                           CommandParameter="{Binding}" 
                                           Visibility="{Binding SubmissionStatus, Converter={StaticResource SubmissionStatusToVisibility}, ConverterParameter=Pending}"/>
-                                <MenuItem Header="Appeal this submission" Command="{Binding AppealSubmissionCommand}"
+                                <MenuItem Header="{x:Static p:Resources.IDS_PORTALS_CONTEXTMENU_APPEALSUBMISSION}" 
+                                          Command="{Binding AppealSubmissionCommand}"
                                           Visibility="{Binding SubmissionStatus, Converter={StaticResource SubmissionStatusToVisibility}, ConverterParameter=Rejected}"/>
-                                <MenuItem Header="Appeal Succeeded" Command="{Binding ManualAcceptCommand}"
+                                <MenuItem Header="{x:Static p:Resources.IDS_PORTALS_CONTEXTMENU_APPEAL_SUCCEEDED}" Command="{Binding ManualAcceptCommand}"
                                           Visibility="{Binding SubmissionStatus, Converter={StaticResource SubmissionStatusToVisibility}, ConverterParameter=Appealed}"/>
-                                <MenuItem Header="Manual Accept" Command="{Binding ManualAcceptCommand}"/>
+                                <MenuItem Header="{x:Static p:Resources.IDS_PORTALS_CONTEXTMENU_MANUAL_ACCEPT}" Command="{Binding ManualAcceptCommand}"/>
                             </ContextMenu>
 
                         </Grid.ContextMenu>

@@ -205,6 +205,24 @@ namespace IPST_GUI.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Appeal Succeeded.
+        /// </summary>
+        public static string IDS_PORTALS_CONTEXTMENU_APPEAL_SUCCEEDED {
+            get {
+                return ResourceManager.GetString("IDS_PORTALS_CONTEXTMENU_APPEAL_SUCCEEDED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Appeal this submission.
+        /// </summary>
+        public static string IDS_PORTALS_CONTEXTMENU_APPEALSUBMISSION {
+            get {
+                return ResourceManager.GetString("IDS_PORTALS_CONTEXTMENU_APPEALSUBMISSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Details.
         /// </summary>
         public static string IDS_PORTALS_CONTEXTMENU_DETAILS {
@@ -219,6 +237,15 @@ namespace IPST_GUI.Properties {
         public static string IDS_PORTALS_CONTEXTMENU_IGNORE_SUBMISSION {
             get {
                 return ResourceManager.GetString("IDS_PORTALS_CONTEXTMENU_IGNORE_SUBMISSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Manual Accept.
+        /// </summary>
+        public static string IDS_PORTALS_CONTEXTMENU_MANUAL_ACCEPT {
+            get {
+                return ResourceManager.GetString("IDS_PORTALS_CONTEXTMENU_MANUAL_ACCEPT", resourceCulture);
             }
         }
         

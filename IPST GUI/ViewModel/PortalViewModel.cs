@@ -209,7 +209,6 @@ namespace IPST_GUI.ViewModel
         }
 
         #endregion
-
         #region OpenSubmissionCommand
 
         private RelayCommand<PortalViewModel> _openSubmissionCommand;
@@ -253,8 +252,11 @@ namespace IPST_GUI.ViewModel
 
         private void ExecuteAppealSubmissionCommand()
         {
-            _portalSubmission.SubmissionStatus = SubmissionStatus.Appealed;
-            _portalSubmissionRepository.Save(_portalSubmission);
+            if (_portalSubmissionRepository != null)
+            {
+                _portalSubmission.SubmissionStatus = SubmissionStatus.Appealed;
+                _portalSubmissionRepository.Save(_portalSubmission);
+            }
         }
 
         #endregion

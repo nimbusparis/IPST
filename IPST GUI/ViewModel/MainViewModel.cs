@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using GalaSoft.MvvmLight;
 using IPST_Engine.Repository;
 using IPST_Engine;
@@ -16,16 +14,14 @@ namespace IPST_GUI.ViewModel
     public partial class MainViewModel : ViewModelBase
     {
         private readonly IIPSTEngine _gmailEngine;
-        private readonly IPortalSubmissionRepository _repository;
 
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IIPSTEngine gmailEngine, IPortalSubmissionRepository repository)
+        public MainViewModel(IIPSTEngine gmailEngine)
         {
             _gmailEngine = gmailEngine;
-            _repository = repository;
         }
 
         private bool _ParsingInProgress;
@@ -97,6 +93,10 @@ namespace IPST_GUI.ViewModel
         {
             get { return _gmailEngine.Rejected == null ? 0 : _gmailEngine.Rejected.Count; }
         }
+        public int AppealedNumber
+        {
+            get { return _gmailEngine.Appealed == null ? 0 : _gmailEngine.Appealed.Count; }
+        }
         public int AllNumber
         {
             get { return _gmailEngine.All == null ? 0 : _gmailEngine.All.Count; }
@@ -113,6 +113,10 @@ namespace IPST_GUI.ViewModel
         public IList<PortalSubmission> Rejected
         {
             get { return _gmailEngine.Rejected; }
+        }
+        public IList<PortalSubmission> Appealed
+        {
+            get { return _gmailEngine.Appealed; }
         }
         public IList<PortalSubmission> All
         {

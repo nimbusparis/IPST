@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows;
 using GalaSoft.MvvmLight.Command;
 using IPST_Engine;
 using IPST_GUI.Message;
-using IPST_GUI.Properties;
 
 namespace IPST_GUI.ViewModel
 {
@@ -28,7 +26,7 @@ namespace IPST_GUI.ViewModel
 
         private async void ExecuteConnectCommandCommand()
         {
-            var clientSecretStream = this.GetType().Assembly.GetManifestResourceStream("IPST_GUI.Resources.client_secret.json");
+            var clientSecretStream = GetType().Assembly.GetManifestResourceStream("IPST_GUI.Resources.client_secret.json");
             await _gmailEngine.ConnectAsync(clientSecretStream);
         }
 

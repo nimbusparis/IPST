@@ -201,4 +201,13 @@
   <data name="IDS_PORTALS_SEARCH_TITLE" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="IDS_PORTALS_CONTEXTMENU_APPEALSUBMISSION" xml:space="preserve">
+    <value>Appeal this submission</value>
+  </data>
+  <data name="IDS_PORTALS_CONTEXTMENU_APPEAL_SUCCEEDED" xml:space="preserve">
+    <value>Appeal Succeeded</value>
+  </data>
+  <data name="IDS_PORTALS_CONTEXTMENU_MANUAL_ACCEPT" xml:space="preserve">
+    <value>Manual Accept</value>
+  </data>
 </root>

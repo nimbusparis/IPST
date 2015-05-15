@@ -247,7 +247,7 @@ namespace TestGoogleAPI.ViewModel
                 return;
             }
             var list = _service.Users.Messages.List("me");
-            list.Q = string.Format("from:ingress-support@google.com subject:\"Ingress Portal Data Edit NewAccepted\" after:{0:yyyy/MM/dd}", DateTime.MinValue);
+            list.Q = string.Format("from:henridevos2@gmail.com subject:\"Portal review complete:\"");
             
             var messagesResponse = list.Execute();
             //var xmlSerialiser = new XmlSerializer(typeof (Message));

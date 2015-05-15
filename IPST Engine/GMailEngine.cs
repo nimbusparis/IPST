@@ -75,6 +75,10 @@ namespace IPST_Engine
         {
             get { return _repository.GetAll(submission => submission.SubmissionStatus == SubmissionStatus.Accepted).OrderByDescending(p => p.DateAccept).ToList(); }
         }
+        public IList<PortalSubmission> Appealed
+        {
+            get { return _repository.GetAll(submission => submission.SubmissionStatus == SubmissionStatus.Appealed).OrderByDescending(p => p.DateReject).ToList(); }
+        }
 
         public IList<PortalSubmission> All
         {

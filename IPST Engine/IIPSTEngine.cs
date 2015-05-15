@@ -13,6 +13,7 @@ namespace IPST_Engine
         IList<PortalSubmission> Pending { get; }
         IList<PortalSubmission> Rejected { get; }
         IList<PortalSubmission> Accepted { get; }
+        IList<PortalSubmission> Appealed { get; }
         IList<PortalSubmission> All { get; } 
 
     }

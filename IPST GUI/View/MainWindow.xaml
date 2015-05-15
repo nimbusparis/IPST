@@ -85,10 +85,11 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Width="40" Height="40" Margin="20" Command="{Binding ShowPortalsCommand}" CommandParameter="{Binding Pending}">
                 <Border BorderBrush="DarkCyan" >
-                    <TextBlock FontFamily="Webdings" FontSize="18" Foreground="Blue">s</TextBlock>
+                    <TextBlock FontFamily="Webdings" FontSize="18" Foreground="SlateGray">s</TextBlock>
                 </Border>
             </Button>
             <TextBlock Grid.Row="1" Text="{Binding PendingNumber}" HorizontalAlignment="Center"/>
@@ -104,7 +105,13 @@
                 </Border>
             </Button>
             <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding RejectedNumber}" HorizontalAlignment="Center"/>
-            <Button Grid.Row="2" Grid.ColumnSpan="3" Command="{Binding ShowPortalsCommand}" CommandParameter="{Binding All}">
+           <Button Grid.Column="3" Width="40" Height="40"  Margin="20" Command="{Binding ShowPortalsCommand}" CommandParameter="{Binding Appealed}">
+                <Border BorderBrush="DarkCyan">
+                    <TextBlock FontFamily="Webdings" FontSize="18" Foreground="Blue">U</TextBlock>
+                </Border>
+            </Button>
+            <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding AppealedNumber}" HorizontalAlignment="Center"/>
+            <Button Grid.Row="2" Grid.ColumnSpan="4" Command="{Binding ShowPortalsCommand}" CommandParameter="{Binding All}">
                 <TextBlock Text="{x:Static p:Resources.IDS_MAIN_ALL_BUTTON_TITLE}" />
             </Button>
         </Grid>

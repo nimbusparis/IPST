@@ -61,6 +61,20 @@ namespace IPST_GUI.Design
             }
         }
 
+        public IList<PortalSubmission> Appealed
+        {
+            get
+            {
+                var result = new List<PortalSubmission>
+                {
+                    new PortalSubmission {SubmissionStatus = SubmissionStatus.Appealed} ,
+                    new PortalSubmission {SubmissionStatus = SubmissionStatus.Appealed} ,
+                    new PortalSubmission {SubmissionStatus = SubmissionStatus.Appealed} ,
+                };
+                return result;
+            }
+        }
+
         public IList<PortalSubmission> Rejected {
             get
             {

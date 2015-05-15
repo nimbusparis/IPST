@@ -28,8 +28,7 @@ namespace TestGUI
         public void TestConnectionCommand()
         {
             var gmailEngine = A.Fake<IIPSTEngine>();
-            var repository = A.Fake<IPortalSubmissionRepository>();
-            var viewModel = new MainViewModel(gmailEngine, repository);
+            var viewModel = new MainViewModel(gmailEngine);
             Check.ThatCode(() => viewModel.ConnectCommand.Execute(null)).DoesNotThrow();
             A.CallTo(()=>gmailEngine.ConnectAsync(A<Stream>._)).MustHaveHappened();
         }
@@ -48,8 +47,7 @@ namespace TestGUI
         public void TestCheckEmailCommand()
         {
             var gmailEngine = A.Fake<IIPSTEngine>();
-            var repository = A.Fake<IPortalSubmissionRepository>();
-            var viewModel = new MainViewModel(gmailEngine, repository);
+            var viewModel = new MainViewModel(gmailEngine);
             Check.ThatCode(() => viewModel.CheckEmailsCommand.Execute(null)).DoesNotThrow();
         }
 
@@ -57,8 +55,7 @@ namespace TestGUI
         public void ShowPortalCommand_Test()
         {
             var gmailEngine = A.Fake<IIPSTEngine>();
-            var repository = A.Fake<IPortalSubmissionRepository>();
-            var viewModel = new MainViewModel(gmailEngine, repository);
+            var viewModel = new MainViewModel(gmailEngine);
             var portals = new List<PortalSubmission>
             {
                 new PortalSubmission(),
