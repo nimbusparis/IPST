@@ -58,7 +58,9 @@ namespace IPST_GUI.ViewModel
                 _unityContainer.RegisterType<IIPSTEngine, IPSTEngine>();
                 _unityContainer.RegisterType<IPortalSubmissionParser, PortalSubmissionParser>();
                 _unityContainer.RegisterType<IPortalSubmissionRepository, PortalSubmissionRepository>();
-                _sessionFactory = Fluently.Configure().Database(SQLiteConfiguration.Standard.UsingFile("IPSTData.db"))
+                Configuration cfg = new Configuration().Configure();
+                //_sessionFactory = Fluently.Configure(cfg)//.Database(SQLiteConfiguration.Standard.UsingFile("IPSTData.db"))
+                _sessionFactory = Fluently.Configure(cfg).Database(SQLiteConfiguration.Standard.UsingFile("IPSTData.db"))
                 .Mappings(m => m.FluentMappings.Add<PortalSubmissionMapping>())
                 .ExposeConfiguration(c => _configuration = c)
                 .ExposeConfiguration(c=>new SchemaUpdate(c).Execute(false, true))

@@ -198,4 +198,7 @@
   <data name="IDS_REJECTION_REASON_TOO_CLOSE" xml:space="preserve">
     <value>Your portal submission is too close from another existing portal</value>
   </data>
+  <data name="IDS_PORTALS_SEARCH_TITLE" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

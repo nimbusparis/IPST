@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -8,6 +9,7 @@ using IPST_Engine;
 using IPST_GUI.Message;
 using IPST_GUI.ViewModel;
 using NHibernate.Linq;
+using NHibernate.Util;
 
 namespace IPST_GUI.View
 {
@@ -16,6 +18,7 @@ namespace IPST_GUI.View
     /// </summary>
     public partial class PortalsView : Window
     {
+            PortalsViewModel _viewModel;
         /// <summary>
         /// Initializes a new instance of the PortalsView class.
         /// </summary>
@@ -23,10 +26,10 @@ namespace IPST_GUI.View
         {
             InitializeComponent();
             
-            PortalsViewModel viewModel = DataContext as PortalsViewModel;
-            viewModel.PortalSubmissions = new ObservableCollection<PortalViewModel>();
+            _viewModel = DataContext as PortalsViewModel;
             ViewModelLocator locator = FindResource("Locator") as ViewModelLocator;
-            portalSubmissions.ForEach(p => viewModel.PortalSubmissions.Add(new PortalViewModel(p, locator.PortalSubmissionRepository)));
+            _viewModel.PortalSubmissions = portalSubmissions.ToList();
+            //portalSubmissions.ForEach(p => viewModel.PortalSubmissions.Add(new PortalViewModel(p, locator.PortalSubmissionRepository)));
 
             Messenger.Default.Register<MessageNavigatePortal>(this, NotificationMessageReceived);
             Messenger.Default.Register<MessageManualAcceptPortal>(this, NavigateManualAcceptPortal);
@@ -60,6 +63,12 @@ namespace IPST_GUI.View
                 }
                 elem = (UIElement)VisualTreeHelper.GetParent(elem);
             }
+        }
+
+        private void Text_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_viewModel != null)
+                _viewModel.QueryCommand.Execute(((TextBox)sender).Text);
         }
     }
 }

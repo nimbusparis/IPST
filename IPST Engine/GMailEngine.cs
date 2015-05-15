@@ -7,6 +7,8 @@ using System.Resources;
 using System.Threading;
 using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
+using Google.Apis.Auth.OAuth2.Mvc;
+using Google.Apis.Auth.OAuth2.Web;
 using Google.Apis.Gmail.v1;
 using Google.Apis.Gmail.v1.Data;
 using Google.Apis.Services;
@@ -45,6 +47,17 @@ namespace IPST_Engine
                     ApplicationName = "IPST Windows"
                 });
 
+        }
+
+        public async Task Connect(AuthorizationCodeMvcApp.AuthResult authResult, string ApplicationName)
+        {
+            if (authResult == null) throw new ArgumentNullException("authResult");
+            _gmailService =
+                new GmailService(new BaseClientService.Initializer
+                {
+                    HttpClientInitializer = authResult.Credential,
+                    ApplicationName = ApplicationName
+                });
         }
 
         public IList<PortalSubmission> NewPendings { get; private set; }

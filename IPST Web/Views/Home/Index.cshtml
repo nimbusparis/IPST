@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Pending submissions</h2>
+        @*<p class="label label-info">@Html.DisplayFor(m => m.NumberPending)</p>*@
+    </div>
+    <div class="col-md-4">
+        <h2>Accepted submissions</h2>
+        <p class="label label-success">252</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Rejected submissions</h2>
+        <p class="label label-danger">260</p>
+    </div>
+</div>
+<p />
+<div class="row">
+    <div class="col-md-1">
+        <button>
+            <p>@Html.ActionLink("Check Emails", "Contact", "Home")</p>
+        </button>
+    </div>
+</div>

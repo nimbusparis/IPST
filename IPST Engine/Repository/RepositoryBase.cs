@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using NHibernate;
-using NHibernate.Linq;
+using NHibernate.Util;
 
 namespace IPST_Engine.Repository
 {

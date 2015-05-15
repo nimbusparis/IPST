@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq.Expressions;
 using FakeItEasy;
+using Google.Apis.Auth.OAuth2.Mvc;
 using Google.Apis.Gmail.v1.Data;
 using IPST_Engine;
 using IPST_Engine.Repository;
@@ -244,6 +245,34 @@ namespace Tests
             target.ConnectAsync(clientSecretStream).Wait();
             target.CheckSubmissions(_progress).Wait();
             A.CallTo(()=>_progress.Report(A<SubmissionProgress>._)).MustHaveHappened();
+        }
+
+        [Fact(Skip = "Not testable method")]
+        public void ConnectAsyncTest()
+        {
+            var target = new IPSTEngine(repository, parser);
+            AuthorizationCodeMvcApp.AuthResult result = new AuthorizationCodeMvcApp.AuthResult();
+            var task = target.Connect(result, null);
+
+            task.Wait();
+
+            Check.That(task.IsFaulted).IsFalse();
+
+        }
+        [Fact]
+        public void ConnectAsync_WithResultNullTest()
+        {
+            var target = new IPSTEngine(repository, parser);
+            var t = target.Connect(null, null);
+            try
+            {
+                t.Wait();
+            }
+            catch (AggregateException e)
+            {
+                Check.That(e.InnerExceptions[0]).IsInstanceOf<ArgumentNullException>();
+            }
+            Check.That(t.IsFaulted).IsTrue();
         }
     }
 }

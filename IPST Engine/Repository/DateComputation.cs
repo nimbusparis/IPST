@@ -30,9 +30,9 @@ namespace IPST_Engine.Repository
                 return null;
             if (portalSubmission.SubmissionStatus == SubmissionStatus.Pending)
                 return null;
-            if (portalSubmission.SubmissionStatus == SubmissionStatus.Accepted)
+            if (portalSubmission.SubmissionStatus == SubmissionStatus.Accepted && portalSubmission.DateAccept.HasValue)
                 return (portalSubmission.DateAccept.Value - portalSubmission.DateSubmission.Value).Days;
-            if (portalSubmission.SubmissionStatus == SubmissionStatus.Rejected)
+            if (portalSubmission.SubmissionStatus == SubmissionStatus.Rejected && portalSubmission.DateReject.HasValue)
                 return (portalSubmission.DateReject.Value - portalSubmission.DateSubmission.Value).Days;
             return 0;
         }

@@ -66,6 +66,19 @@ namespace IPST_GUI.ViewModel
                            ));
             }
         }
+        private void ExecuteSaveCommand()
+        {
+            _portalSubmission.SubmissionStatus = SubmissionStatus.Accepted;
+            _repository.Save(_portalSubmission);
+        }
+
+        private bool CanExecuteSaveCommand()
+        {
+            // Replace this condition if needed
+            return true;
+        }
+
+        #endregion
 
 
 
@@ -124,18 +137,5 @@ namespace IPST_GUI.ViewModel
 
 
 
-        private void ExecuteSaveCommand()
-        {
-            _portalSubmission.SubmissionStatus = SubmissionStatus.Accepted;
-            _repository.Save(_portalSubmission);
-        }
-
-        private bool CanExecuteSaveCommand()
-        {
-            // Replace this condition if needed
-            return true;
-        }
-
-        #endregion
     }
 }

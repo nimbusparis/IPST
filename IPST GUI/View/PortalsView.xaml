@@ -14,6 +14,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
         <Menu>
@@ -26,7 +27,16 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ListView x:Name="PortalListView" Grid.Row="1" ItemsSource="{Binding PortalSubmissions}" MouseDoubleClick="ListView_MouseDoubleClick">
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{x:Static p:Resources.IDS_PORTALS_SEARCH_TITLE}" Margin="2,2,5,2"/>
+            <TextBox x:Name="Text" Grid.Column="1" Margin="5,2,2,2" Text="{Binding Query}" TextChanged="Text_TextChanged"/>
+        </Grid>
+        <ListView x:Name="PortalListView" Grid.Row="2" ItemsSource="{Binding DisplayedPortalSubmissions}" MouseDoubleClick="ListView_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     
@@ -42,6 +52,7 @@
                                           Visibility="{Binding SubmissionStatus, Converter={StaticResource SubmissionStatusToVisibility}, ConverterParameter=Rejected}"/>
                                 <MenuItem Header="Appeal Succeeded" Command="{Binding ManualAcceptCommand}"
                                           Visibility="{Binding SubmissionStatus, Converter={StaticResource SubmissionStatusToVisibility}, ConverterParameter=Appealed}"/>
+                                <MenuItem Header="Manual Accept" Command="{Binding ManualAcceptCommand}"/>
                             </ContextMenu>
 
                         </Grid.ContextMenu>
@@ -57,7 +68,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.RowSpan="2" Margin="5" Width="20" Height="20" Background="{Binding DefaultThumbnailColor}" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding DefaultThumbnailSymbol}" FontFamily="Webdings" Foreground="White" />
-                        <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding PortalImage}" Margin="5" Width="20" Height="20" Stretch="Fill" Visibility="{Binding ImageLoaded}"/>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Source="{Binding PortalImage}" Margin="5" Width="20" Height="20" Stretch="Fill" Visibility="{Binding ImageLoaded}"/>
                         <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Title}" Margin="3,0"/>
                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SubmissionDate, StringFormat=D}" Margin="3,0"/>
                         <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding LastNew}" Margin="3,0"/>

@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Command;
 using IPST_Engine;
 using IPST_Engine.Repository;
 using NHibernate.Linq;
+using NHibernate.Util;
 using Remotion.Linq.Collections;
 
 namespace IPST_GUI.ViewModel

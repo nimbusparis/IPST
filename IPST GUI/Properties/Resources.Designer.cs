@@ -277,6 +277,15 @@ namespace IPST_GUI.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Search.
+        /// </summary>
+        public static string IDS_PORTALS_SEARCH_TITLE {
+            get {
+                return ResourceManager.GetString("IDS_PORTALS_SEARCH_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Portal submission is duplicate.
         /// </summary>
         public static string IDS_REJECTION_REASON_DUPLICATE {
