@@ -74,9 +74,47 @@ namespace IPST_Engine
                 #endregion
                 portalSubmission.RejectionReason = RejectionReason.Duplicate;
             }
+            else if (subject.StartsWith("Portal review complete:"))
+            {
+                portalSubmission = ExtractPortalSubmissionFromNewFormat(message);
+            }
             else
             {
                 return null;
+            }
+            return portalSubmission;
+        }
+
+        private PortalSubmission ExtractPortalSubmissionFromNewFormat(Message message)
+        {
+            PortalSubmission portalSubmission = null;
+            var htmlPart = message.Payload.Parts.FirstOrDefault(p => p.MimeType == "text/html");
+            var decodedHtmlText = DecodeBase64Url(htmlPart.Body.Data);
+            var dateMail = Convert.ToDateTime((string)message.Payload.Headers.FirstOrDefault(h => h.Name == "Date").Value);
+            portalSubmission = new PortalSubmission();
+            portalSubmission.Title = message.Payload.Headers.FirstOrDefault(h => h.Name == "Subject")
+                .Value.Substring(24);
+            portalSubmission.ImageUrl =
+                ExtractImageUrl(decodedHtmlText);
+            var doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(decodedHtmlText);
+            var nodes = doc.DocumentNode.SelectNodes("//a");
+            if (
+                decodedHtmlText.Contains(
+                    "Good work, Agent: we've accepted your submission, and this Portal is now available on your Scanner and on the Intel Map."))
+            {
+                portalSubmission.DateAccept = dateMail;
+                portalSubmission.SubmissionStatus = SubmissionStatus.Accepted;
+                portalSubmission.PortalUrl = ExtractPortalUrl(decodedHtmlText);
+                portalSubmission.PostalAddress = nodes[0].InnerText;
+            }
+            else if (decodedHtmlText.Contains(("We've reviewed your Portal submission and given the information you&#39;ve provided in your submission, we have decided not to accept this candidate.")))
+            {
+                portalSubmission.DateReject = dateMail;
+                portalSubmission.SubmissionStatus = SubmissionStatus.Rejected;
+                portalSubmission.RejectionReason = RejectionReason.NotMeetCriteria;
+                portalSubmission.PostalAddress = nodes[2].InnerText;
+                portalSubmission.PortalUrl = new Uri(nodes[2].Attributes[0].Value);
             }
             return portalSubmission;
         }

@@ -151,7 +151,11 @@ namespace IPST_Engine
         public async Task CheckSubmissions(IProgress<SubmissionProgress> progress)
         {
             var lastCheck = _repository.GetLastSubmissionDateTime();
-            List<PortalSubmission> lstMessages = await GetPortalEmails("\"Ingress Portal\"", lastCheck, progress);
+            List<PortalSubmission> lstMessages ;
+            var lstMessageOldFormat = await GetPortalEmails("\"Ingress Portal\"", lastCheck, progress);
+            var lstMessageNewFormat = await GetPortalEmails("\"Portal review complete\"", lastCheck, progress);
+            lstMessageOldFormat.AddRange(lstMessageNewFormat);
+            lstMessages = lstMessageOldFormat;
              // Remove the submission already parsed of the day
             var newMessages = new List<PortalSubmission>();
             foreach (var portalSubmission in lstMessages)
